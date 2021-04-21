@@ -16,3 +16,10 @@ Question | Pattern | Type | Further Suggestion |time 1 |time 2| Notes | Link
 |[PC-Matrix_Path_with_Jump](recursion/PC-Matrix_Path_with_Jump.java)| draw the tree and think of options and base case |Recursion| |15 min|| NO Obstacles on Path.
 |[PC-Kinghts_Tour](Backtracking/PC-Kinghts_tour.java) | For Every move, you have 8 options. move to a valid option untill board is full then backtrack|BackTracking| |40 mins|||
 |[LC-377_Combination_sum_4](Bactracking/LC-377_Combination_sum_4.java)| recur + dp[] | Backtracking|What if input has negative nums?| 10 mins | |Never initialize dp[] or memo[] with 0, because actual ans can be 0|s
+|[PC-Climb_stairs](Dynamic_Programing/PC-CLimb_stairs.java)|optimal subproblem | Dynamic Programing |do it using Tabulation|25 min |
+|[PC-Climb_stairs_variable_jump](Dynamic_Programing/PC-Climb_stairs_variable_jump.java)|Think of the options for every node| Dynamic Programing| Do it using Tabulation| 25 mins |
+|[PC-Climb_stairs_mimimum_jump](Dynamic_Programing/PC-Climb_stairs_minimum_jump.java)| think of using min jump, adds 1 at every node|Dynamic Programing| try with tabulation | 30 mins |
+|[PC-Min_cost_of_maze](Dynamic_Programing/PC-Min_cost_of_maze.java)| Find min of all options and add current node's value|Dynamic Programing| try tabulation| 35 mins||
+|[PC-GoldMine](Dynamic_Programing/PC-GoldMine.java)| We have to find the min cost path but the starting point can be any element of first column, so run mincostfinder() for all starting points.| Dynamic Programing| Try Tabulation 35 mins |
+
+
