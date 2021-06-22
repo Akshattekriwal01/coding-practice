@@ -29,5 +29,6 @@ Solution to Aditya Verma's Playlist on Dynamic Programing.
 
 | Question                                       | Pattern          | Further Suggestion | time 1 | time 2 | Notes | Link |
 | :----------------------------------------------- | ------------------ | -------------------- | -------- | -------- | ------- | ------ |
-| [0/1 Knapsack](Dynamic_Programing/01-knapsack.java) | classic Knapsack |                    |        |        |       |  gfg | 
+| [0/1 Knapsack](Dynamic_Programing/01-knapsack.java) | classic Knapsack |                    |        |        |  base case never negative because capacity- val[n-1] >= 0 always     |  gfg | 
 |  [Subset sum problem](Dynamic_Programing/Subset_sum_problem.java)| knapsack      |                    |        |        |   good base case revision.|     Interview Bit |
+|  [Partition_equal_subset_sum](Dynamic_Programing/Partition_equal_subset_sum.java)| knapsack      |                    |        |        |   dont init dp[ ][ ] with null. it's redundant|     Leetcode|
