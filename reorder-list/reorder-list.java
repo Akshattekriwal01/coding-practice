@@ -27,6 +27,9 @@ class Solution {
             c1 = p2 ; 
             
         }
+        // fix the changed data. 
+        // rev = reverse(rev);
+        //mid.next = rev;
                  
     }
     
