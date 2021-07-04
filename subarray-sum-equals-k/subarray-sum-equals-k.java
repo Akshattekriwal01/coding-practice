@@ -37,3 +37,6 @@ class Solution {
         
     }
 }
+
+// also think why this problem cannot be solved with sliding window, because, there are non positive numbers, 
+// for example once we exceed k, we done have garuntee that we can below k if keep removing i's
