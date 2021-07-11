@@ -10,13 +10,15 @@ class Detail implements Comparable<Detail> {
         this.arr = arr; 
     }
     public int compareTo(Detail o){
-        return Integer.compare(this.arr[1],o.arr[1]);
+        return Integer.compare(this.arr[0],o.arr[0]);
     }
 }
 class MovieRentingSystem {
    // [shopi, moviei, pricei]
     HashMap<Integer, Shop> map ; 
     HashMap<Integer, PriorityQueue< Detail>> system ; 
+    PriorityQueue<Detail> cheapestRented = new PriorityQueue<>( (Detail a , Detail b)-> -1 * Integer.compare(a.arr[2],b.arr[2]));
+
     public MovieRentingSystem(int n, int[][] entries) {
         map = new HashMap<>();
         for(int i = 0 ; i< n ; i++){
@@ -29,20 +31,30 @@ class MovieRentingSystem {
       system = new HashMap<>();
         Comparator<Detail> comp = ( (Detail a , Detail b)-> -1 * Integer.compare(a.arr[2],b.arr[2]) );
       for(int i = 0 ; i< n ; i++){
-        system.put(i, new PriorityQueue<Detail>(comp) );
+        system.put(i, new PriorityQueue<Detail>(comp));
       }
         for(int[] arr : entries){
             addToSystem(arr);
         }
     }
     public void addToSystem(int[] entry){
-        PriorityQueue<Detail> pq = system.get(entry[0]);
+        PriorityQueue<Detail> pq = system.get(entry[1]);
         if(pq.size()<=5){
             pq.add(new Detail(entry));
         }else{
             if(pq.peek().arr[2] > entry[2]){
                 pq.poll();
                 pq.add(new Detail(entry));
+            }    
+        }
+    }
+    public void addToRented(int[] entry){
+        if(cheapestRented.size()<=5){
+            cheapestRented.add(new Detail(entry));
+        }else{
+            if(cheapestRented.peek().arr[2] > entry[2]){
+                cheapestRented.poll();
+                cheapestRented.add(new Detail(entry));
             }    
         }
     }
@@ -74,7 +86,9 @@ class MovieRentingSystem {
         arr[0] = shop;
         arr[1] = movie;
         arr[2] = 0;
-        system.get(shop).remove(arr);
+        system.get(movie).remove(arr);
+        addToRented(arr);
+
     }
     
     public void drop(int shop, int movie) { 
@@ -82,10 +96,11 @@ class MovieRentingSystem {
         int price = s.getPrice(movie);
         int [] entry = {shop,movie,price};
         addToSystem(entry);
+        removeFromRented(entry);
     }
     
     public List<List<Integer>> report() { // o(1) with heap        
-        
+
     }
 }
 class Shop {
