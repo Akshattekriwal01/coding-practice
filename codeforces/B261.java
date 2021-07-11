@@ -6,6 +6,7 @@ class B261{
         Scanner sc = new Scanner(System.in);
         int n =sc.nextInt();
         int[] arr = new int[n];
+
         for(int i = 0 ; i < n ; i++){
             arr[i] = sc.nextInt();
         }
@@ -14,7 +15,6 @@ class B261{
         int diff = arr[n-1]-arr[0];
         HashMap<Integer,Integer> map = new HashMap<>(); 
         int count = 0;
-        
         for(int a = 0  ; a < n ; a++){
             int key = arr[a] - diff; 
             
