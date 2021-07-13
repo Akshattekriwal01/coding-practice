@@ -20,10 +20,8 @@ class Solution {
     public boolean lca(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null)
             return false;
-        else if (root == p && root == q){
-            ancestor = root ;
-            return true;
-        }else {
+    
+       else {
 
             boolean flag = (root == q || root == p); 
             boolean left = lca(root.left, p,q);
