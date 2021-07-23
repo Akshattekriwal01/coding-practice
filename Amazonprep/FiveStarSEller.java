@@ -45,6 +45,58 @@ The array productRatings contains only non-negative integers.
 */
 public class FiveStarSEller {
 	public static void main(String[] args) {
+		double threshold = 77 ;
+		int[][] review = {{4,4},{1,2},{3,6}};
+		
+		double total = 0 ;
+		for(int[] n : review) {
+			total += (double)(n[0]/n[1]);
+		}
+//		Pair p = helper(review);
+//		System.out.println(p.increase);
+//		System.out.println(p.index);
+//		
+		int count = 0 ;
+		while(count < 4 && (total/review.length)*100 < threshold) {
+			System.out.println("e");
+			Pair p = helper(review);
+			review[p.index][0]++;
+			review[p.index][1]++;
+			total += p.increase ;
+			count++;
+		}
+		System.out.println(count);
+	}
+	public static Pair helper(int[][] review) {
+		double total = 0 ; 
+		double change = 0 ;
+		int maxIndex = 0 ;
+		for(int i = 0 ; i < review.length; i++) {
+			int[] n = review[i];
+			System.out.println(n[0]+","+n[1]);	
 			
+			double preRatio = (double)n[0]/n[1] ; 
+			
+			if(preRatio  != 1) {
+				double newRatio = (n[0]+1.0)/(n[1]+1.0);
+				if( (newRatio ) > total) {
+					total= newRatio ; 
+					change = newRatio-preRatio;
+					maxIndex = i ; 
+				}
+			}
+			System.out.println(total);	
+		}
+		Pair p = new Pair(maxIndex,change);
+		return p ;
+	}
+}
+
+class Pair{
+	int index ;
+	double increase ;
+	public Pair(int a , double b) {
+		index = a ;
+		increase = b ;
 	}
 }

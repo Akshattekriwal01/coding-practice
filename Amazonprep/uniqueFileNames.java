@@ -24,7 +24,7 @@ filenames = ["system","access", "access", "system","access", "system",
 "access"]
 Output:
 ["system","access","access1", "system1","access2", "system2", "access3"]
-བཞག་གང་བ། གཞག་གང་ལ་ orienr ་ །ཞབས་
+བཞག་གང་བ། གཞག་གང་ལ་ orienr ་ 
 Explanation:
 filenames[0] = "system" is unique. uniqueFilename[0]="system" filenames[1] =
 "access" is unique. unique Filename[1]="access"
