@@ -16,14 +16,15 @@ Explanation: ["pq", "pqp", "pqpq", "qp", "qpq", "pq", "qs"]
 import java.util.*;
 public class kDistinctCharacters {
 	public static void main(String[] args) {
-	String  s = "pqpqs"; int len = 2;
+	String  s = "pqpqf"; int len = 0;
 	// FIND AT MOST K DISTANT - AT MOST (K-1) DISTANT
+
 	int ans = helper(s,len) - helper(s,len-1)  ;
 	System.out.println(ans);
 	}
 
 	public static int helper(String s , int len ) {
-
+		if(len <= 0) return 0 ;
 		HashMap<Character,Integer> map = new HashMap<Character,Integer>();
 		
 		int count = 0 ;

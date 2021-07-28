@@ -48,7 +48,6 @@ public class diagonalTraverseStringDecode {
 		while(i < matrix.length && j < matrix[0].length) {
 			int cache = j ;
 			while(i < matrix.length && j < matrix[0].length) {
-				System.out.println(i+","+j);
 				ans += matrix[i][j] == '_'? ' ': matrix[i][j];
 				j++ ;
 				i++ ;
