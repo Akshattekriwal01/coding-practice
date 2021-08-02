@@ -1,64 +1,11 @@
-/*
-Given intervals below. 
-----------
-            -----       
-                        -------
-                           ------
-                          --------
-*/
+/*Explaination. 
+so we understand that when 2 intervals overlap we have to remove one of them. which one would you remove?
+Remove the one with longer finsih time. [may be just removing the one with longer finish time will make the remaining
+intervals non-overlapping]
 
-
-
-/**
-public int eraseOverlapIntervals(Interval[] intervals) {
-    if (intervals.length == 0)
-        return 0;
-    Arrays.sort(intervals, new MyComparator());
-    int count = 0;
-    int end = intervals[0].end;
-    for (int i =1; i < intervals.length; i++){
-    
-        if(intervals[i].start < end){
-            count += 1;
-        }
-        else end = intervals[i].end;
-    }
-    return count;
-    
-}
+{all intervals} - {max compatible intervals} = minimum deleted intervals
 
 */
-
-// one has to understand that when we the over lapping intervals get max non over lapping intervals .
-
-
-
-
-// class Solution {
-//     public int eraseOverlapIntervals(int[][] intervals) {
-        
-//         Arrays.sort(intervals, new Comparator<int[]> (){
-//             public int compare(int[] a, int[] b){
-//                 return Integer.compare(a[1],b[1]);
-//             }
-//         });
-
-//         int count = 0; // basically couting overlapping intervals
-//         int prevFinish = intervals[0][1];
-//         for(int i = 1 ; i < intervals.length ; i++){
-//             int currStart = intervals[i][0];
-//             if(currStart < prevFinish){
-//                 count++;
-//             }else{
-//                 prevFinish = intervals[i][1];  // make the current end as prev end only when curr start >= prevFinish. other 
-//                                                 // wise there can be more intervals that overlap with previous interval;
-//             }
-           
-//         }
-//         return count ;
-//     }
-// }
-
 class Solution{
     public int eraseOverlapIntervals(int[][] intervals){
         // sort by finish time. 
@@ -73,8 +20,8 @@ class Solution{
                                     -----
         
         */
-        int prevFinish = intervals[0][1]; 
-        for(int i = 1 ; i < intervals.length ;i++){
+        int prevFinish = Integer.MIN_VALUE; 
+        for(int i = 0 ; i < intervals.length ;i++){
             int currStart = intervals[i][0]; 
             int currFinish = intervals[i][1];
             if( currStart < prevFinish){
@@ -86,8 +33,60 @@ class Solution{
         }
        return count ;
         
+        // Alternatively {all intervals} - {max compatible intervals} = minimum deleted intervals
+        
+        /*
+        count = 0 ;
+        int prevFinish = intervals[0][1]; 
+        for(int i = 1 ; i < intervals.length ;i++){
+            int currStart = intervals[i][0]; 
+            int currFinish = intervals[i][1];
+            if( currStart < prevFinish){
+                
+                prevFinish = Math.min(prevFinish, currFinish); // remove the one with longer finsih time when 2 intervals overlap. 
+            }else{
+                count ++ ;
+                prevFinish = currFinish ; 
+            }
+        }
+       return intervals.length - count - 1; 
+       */
+        /*
+        int end = intervals[0].end;
+        int count = 1;        
+
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i].start >= end) {
+                end = intervals[i].end;
+                count++;
+            }
+        }
+        return intervals.length - count;
+    }
+        */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
