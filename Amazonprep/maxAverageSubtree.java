@@ -134,7 +134,7 @@ public class maxAverageSubtree {
 	      (root.child.get(3).child).add(new Node(9));
 	   
 	      Pair1 p = average(root);
-	      display(root);
+	      //display(root);
 	      System.out.println(p.highestManager.key);
 	  }
 	  
