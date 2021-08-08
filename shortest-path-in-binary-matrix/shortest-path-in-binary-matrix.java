@@ -14,18 +14,20 @@ class Solution {
         Queue<int[]> q = new  LinkedList<int[]>() ; 
         int rows = grid.length; 
         int columns = grid[0].length ; 
-        int[] arr = new int[3]; // i,j,count
+        int[] arr = new int[2]; // i,j,count
         
         arr[0] = 0 ; 
         arr[1] = 0 ; 
-        arr[2] = 1 ; 
+        int shortestPath = 1 ;
         if(grid[0][0] == 0 )
             q.add(arr); 
         
         while(!q.isEmpty()){
+            int size = q.size();
+            while(size-- > 0){
             int[] rem = q.poll(); 
             
-               if( rem[0] == (rows-1) && rem[1] == (columns-1) ) return rem[2] ; 
+               if( rem[0] == (rows-1) && rem[1] == (columns-1) ) return shortestPath ; 
             
             int dir[][] = {{-1,-1}, {-1,0}, {-1,1},{0,1}, {1,1}, {1,0}, {1,-1}, {0,-1}};
                 for(int d = 0 ; d < 8 ; d++){
@@ -35,16 +37,17 @@ class Solution {
                  
                     
                     if( r < rows && c < columns && r >= 0 && c >= 0 && grid[r][c] == 0){
-                        int [] arr1 = new int [3]; 
+                        int [] arr1 = new int [2]; 
                         arr1[0] = r ;
                         arr1[1] = c ; 
-                        arr1[2] = rem[2] + 1 ;
                         q.add(arr1) ;
                         grid[r][c] = 1 ; 
                         
                         
                     }
                 }
+            }
+            shortestPath++ ;
         }
         /*[1,0,0],
           [1,1,0],
