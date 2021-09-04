@@ -1,101 +1,116 @@
-// first write the doubly linked list implementation and then write the linkedhashmap representation.
+//  [ 1 , 2 ]  
 
-class ListNode {
-    int key, val ; 
-    ListNode prev , next ;
-    ListNode (int key,int value){
-        this.key = key ; 
-        this.val = value ; 
-    }
-}
+
+
+
+
 class LRUCache {
-    int capacity ; 
-    ListNode head = null ; 
-    ListNode tail = null ;
-    private HashMap<Integer, ListNode> map ; 
-    public LRUCache(int capacity) {
-     this.capacity = capacity ; 
-      map = new HashMap<>();
+        HashMap<Integer, Node> map ;
+        final int MAX ; 
+    class Node {
+        Node prev ; 
+        int key ; 
+        Node next ; 
+        int val ;
+        
+        public Node(){
+            
+        }
+        public Node(int key,int value ) {
+            this.key = key ; 
+            this.val = value ;
+        
+       
     }
-    
-    public void addLast(ListNode n){
-        if(map.size() == 0 ){
-            tail = n ; 
-            head = n ;
-        }else{
-             tail.next = n ; 
-             n.prev = tail;
-             tail = tail.next ; 
+         public String toString() {
+            return key + ", " +val;
         }
         
+
     }
     
-    public void remove(ListNode node){
-        if(map.size() == 1){
+    Node head ;
+    Node tail ;
+      public LRUCache(int capacity) {
+      map =new HashMap<>() ;
+      MAX = capacity ;
+    }
+    
+     public void addLast(Node n){
+         if(tail == null){
+             head = n ;
+             tail = n ;
+             n.prev = null ;
+         }else{
+           tail.next = n ;
+            n.prev = tail ;    
+            tail = n ;  
+         }
+          n.next = null ;   
+    }
+        
+    public void remove(Node n ) {    // evict
+        if(n.prev != null && n.next != null){
+            Node temp = n.prev ; 
+            temp.next = n.next ;// p points to f
+            n.next.prev = temp ;// f points to p
+            
+          }else if(n.prev != null){
+                tail = n.prev ; 
+                tail.next = null ;
+            
+          }else if(n.next != null){
+                head = head.next ; 
+                head.prev = null ;
+            
+          }else{
             head = null ;
             tail = null ;
-        }else if(node.prev == null){ // removing the head ;
-            head = head.next ;
-            head.prev = null ;
-            node.next = null ;
-        }else if(node.next == null){ // removing the last element ;
-            tail = tail.prev;
-            tail.next = null ;
-            node.prev = null ;
-        }else{ // removing something in the middile.
-            ListNode next = node.next ;
-            ListNode prv =  node.prev ; 
-            prv.next = next ;
-            next.prev = prv ;
-            node.next = null ;
-            node.prev = null ;
-            // nullize next and prev at the end;
-        }
-        map.remove(node.key);
-    }
-    public void makeRecent(ListNode node){
-        int key = node.key;
-        remove(node);
-        addLast(node);
-        map.put(key,node);
+          }
+            n.prev = null ; 
+            n.next = null ;
     }
     
+
+  
+    
     public int get(int key) {
-        if(map.containsKey(key)){ // in java we should use containsKey !!!!!!!!
-            ListNode node = map.get(key);
-            makeRecent(node);
-            int ans = node.val;
-              return ans;
-        }else{
-            return -1 ;
+        if(!map.containsKey(key)) return -1 ;
+           Node val =  map.get(key);
+           remove(val);
+           addLast(val) ;
+       // System.out.println(key + ","+ val.key + "," + val.val) ;
+           return val.val ; 
+    }
+    
+    public void put(int key, int value) {
+        if(map.containsKey(key)){
+            remove(map.get(key)) ; 
+            map.remove(key);
+        } 
+        
+        //System.out.println("put" + map) ;
+        // display(head);
+        if(map.size() >= MAX){
+            map.remove(head.key) ;
+            remove( head );
+        
         }
+        Node n = new Node(key,value); 
+        map.put(key, n) ;
+        addLast(n) ;
       
     }
     
-    public void put(int key, int val) {
-        if(get(key) != -1 ){ // get will put the node at the tail ;
-          ListNode node =  map.get(key);
-          node.val = val ;
-        }else{
-            if(map.size() >= capacity){
-                remove(head);    
-            }
-                ListNode n = new ListNode(key,val);
-                addLast(n);
-                map.put(key,n);
+    public void display(Node head){
+        Node temp = head ; 
+        
+        while(temp != null){
+            System.out.print( ":"+temp) ;
+            temp = temp.next ;
         }
-      //  display(head);
-    }
-    public void display(ListNode head){
-        ListNode curr = head ;
-        while(curr != null){
-            System.out.print("["+curr.key+","+curr.val+",]");
-            curr = curr.next ;
-        }
-        System.out.println();
     }
 }
-
 
 /**
  * Your LRUCache object will be instantiated and called as such:
@@ -103,4 +118,3 @@ class LRUCache {
  * int param_1 = obj.get(key);
  * obj.put(key,value);
  */
-
