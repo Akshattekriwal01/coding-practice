@@ -12,33 +12,31 @@ class Node {
     }
 }
 */
-/*
-first simply copy the linked list 
-for every node a in the orignal list map a* from another list.
-*/
+
 class Solution {
     public Node copyRandomList(Node head) {
-        HashMap<Node,Node> map = new HashMap<Node,Node>(); 
+        HashMap<Node, Node > map = new HashMap<Node, Node>() ; 
         
-        Node curr = head ;
-       
-        Node head2  = new Node(-1) ;
-         Node copy = head2  ;
-        while(curr != null){
-            copy.next = new Node(curr.val);
-            copy = copy.next ;
-            map.put(curr,copy);
-            curr = curr.next ;
-           
+        Node temp = head ;
+        Node head2 = new Node(-1) ;
+        Node temp2 = head2; 
+        while(temp != null){
+            temp2.next = new Node(temp.val) ;
+            temp2 = temp2.next ;
+            map.put(temp, temp2);
+            temp = temp.next ;
         }
-        head2 = head2.next ;
-        curr = head ;
-        copy = head2 ;
-        while(copy != null){
-            copy.random = map.get(curr.random);
-            copy = copy.next ;
-            curr = curr.next ;
+        
+        head2= head2.next ;
+        temp = head ;
+        temp2 = head2 ;
+        
+        while(temp != null){
+            temp2.random = map.get(temp.random) ;
+            temp = temp.next ;
+            temp2 = temp2.next ;
         }
+        
         return head2 ;
     }
 }
