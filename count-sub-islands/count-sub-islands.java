@@ -19,7 +19,7 @@ class Solution {
         int n = grid1.length ; 
         int m = grid1[0].length ; 
         
-        boolean flag = grid2[i][j] == grid1[i][j] ;
+        boolean flag =  grid1[i][j] == 1 ;
         grid2[i][j] = -1 ; 
         int[][] dir = {{0,1},{1,0},{-1,0},{0,-1}};
         boolean ans  =  true; 
